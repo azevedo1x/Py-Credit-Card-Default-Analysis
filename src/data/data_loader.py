@@ -11,9 +11,9 @@ class DataLoader:
             self.data = pd.DataFrame(data)
         elif self.data_path:
             if self.data_path.endswith(('.xls', '.xlsx')):
-                self.data = pd.read_excel(self.data_path)
+                self.data = pd.read_excel(self.data_path, header=0)
             else:
-                self.data = pd.read_csv(self.data_path)
+                self.data = pd.read_csv(self.data_path, header=0)
         else:
             raise ValueError("Nenhuma fonte de dados fornecida")
         

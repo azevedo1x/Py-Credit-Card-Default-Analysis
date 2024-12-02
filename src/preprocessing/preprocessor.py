@@ -13,7 +13,7 @@ class DataPreprocessor:
         
     def _normalize_numeric_features(self, X):
         numeric_features = ['LIMIT_BAL', 'AGE'] + \
-                          [f'PAY_{i}' for i in range(7)] + \
+                          [f'PAY_{i}' for i in range(1, 6)] + \
                           [f'BILL_AMT{i}' for i in range(1,7)] + \
                           [f'PAY_AMT{i}' for i in range(1,7)]
         
