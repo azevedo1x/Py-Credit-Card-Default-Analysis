@@ -52,7 +52,7 @@ class Visualizer:
         
         plt.figure(figsize=(10, 6))
         sns.barplot(x='importance', y='feature', data=feature_importance)
-        plt.title('Top 10 Features Mais Importantes')
+        plt.title('Top 10 Features mais importantes')
         plt.xlabel('Importância')
         plt.ylabel('Feature')
         plt.show()
