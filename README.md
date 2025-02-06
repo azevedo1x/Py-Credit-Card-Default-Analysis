@@ -38,8 +38,8 @@ credit_default_analysis/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/{your-username}/credit-default-analysis.git
-cd credit-default-analysis
+git clone https://github.com/azevedo1x/Py-Credit-Card-Default-Analysis.git
+cd Py-Credit-Card-Default-Analysis
 ```
 
 2. Create a virtual environment:
