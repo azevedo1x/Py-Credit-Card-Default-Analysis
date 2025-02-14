@@ -86,7 +86,7 @@ python main.py
 5. Open a Pull Request
 
 ## Contact
-Gabriel Azevedo - gabriel.azeve04@gmail.com
+@azevedo1x - gabriel.azeve04@gmail.com
 
 ## References
 - Dataset: UCI Machine Learning Repository
