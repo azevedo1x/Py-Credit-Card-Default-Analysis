@@ -1,30 +1,39 @@
 import pandas as pd
+import logging
+from typing import Optional, Tuple, Union
+from pathlib import Path
 
 class DataLoader:
-    def __init__(self, data_path=None):
-        self.data_path = data_path
-        self.data = None
-        
-    def load_data(self, data=None):
-        
-        if data is not None:
-            self.data = pd.DataFrame(data)
-        elif self.data_path:
-            if self.data_path.endswith(('.xls', '.xlsx')):
-                self.data = pd.read_excel(self.data_path, header=0)
-            else:
-                self.data = pd.read_csv(self.data_path, header=0)
-        else:
-            raise ValueError("Nenhuma fonte de dados fornecida")
-        
-        return self.data
     
-    def split_features_target(self):
+    def __init__(self, data_path: Optional[Union[str, Path]] = None):
+        self.data_path = Path(data_path) if data_path else None
+        self.data = None
+        self.logger = logging.getLogger(__name__)
         
-        if self.data is None:
-            raise ValueError("Dados não carregados")
-            
-        X = self.data.drop(['ID', 'default payment next month'], axis=1)
-        y = self.data['default payment next month']
-        
-        return X, y
+    def load_data(self, data: Optional[Union[list, dict]] = None) -> pd.DataFrame:
+        try:
+            if data:
+                self.data = pd.DataFrame(data)
+            elif self.data_path:
+                file_readers = {
+                    ".xls": pd.read_excel,
+                    ".xlsx": pd.read_excel,
+                    ".csv": pd.read_csv,
+                }
+                
+                extension = self.data_path.suffix
+                if extension in file_readers:
+                    self.data = file_readers[extension](self.data_path, header=0)
+                else:
+                    raise ValueError(f"Unsupported file format: {extension}")
+            else:
+                raise ValueError("No data source provided")
+
+            self._validate_data()
+            return self.data
+
+        except Exception as e:
+            self.logger.error(f"Error loading data: {e}")
+            raise
+
+   
