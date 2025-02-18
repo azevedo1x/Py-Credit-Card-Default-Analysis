@@ -35,3 +35,24 @@ class DataLoader:
         except Exception as e:
             self.logger.error(f"Error loading data: {e}")
             raise
+
+    def _validate_data(self) -> None:
+        """Validate the loaded data for required columns and data types."""
+        required_columns = ['ID', 'default payment next month', 'LIMIT_BAL', 'AGE']
+        missing_columns = []
+
+        for col in required_columns:
+            if col not in self.data.columns:
+                missing_columns.append(col)
+        
+        if missing_columns:
+            raise ValueError(f"Missing required columns: {missing_columns}")
+            
+        numeric_columns = ['LIMIT_BAL', 'AGE'] + \
+                         [f'PAY_{i}' for i in range(1, 7)] + \
+                         [f'BILL_AMT{i}' for i in range(1, 7)] + \
+                         [f'PAY_AMT{i}' for i in range(1, 7)]
+                         
+        for col in numeric_columns:
+            if col in self.data.columns and not pd.api.types.is_numeric_dtype(self.data[col]):
+                self.data[col] = pd.to_numeric(self.data[col], errors='coerce')
