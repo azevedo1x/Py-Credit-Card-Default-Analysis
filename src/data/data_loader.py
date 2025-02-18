@@ -37,7 +37,6 @@ class DataLoader:
             raise
 
     def _validate_data(self) -> None:
-        """Validate the loaded data for required columns and data types."""
         required_columns = ['ID', 'default payment next month', 'LIMIT_BAL', 'AGE']
         missing_columns = []
 
