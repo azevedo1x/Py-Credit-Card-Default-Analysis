@@ -42,7 +42,43 @@ class DataPreprocessor:
             
         return x
         
-    
+    def _normalize_numeric_features(self, x: pd.DataFrame) -> pd.DataFrame:
+
+        numeric_features = ['LIMIT_BAL', 'AGE'] + \
+                          [f'PAY_{i}' for i in range(1, 7)] + \
+                          [f'BILL_AMT{i}' for i in range(1, 7)] + \
+                          [f'PAY_AMT{i}' for i in range(1, 7)]
+                          
+
+        for feature in numeric_features:
+            if feature in x.columns:
+                Q1 = x[feature].quantile(0.25)
+                Q3 = x[feature].quantile(0.75)
+                IQR = Q3 - Q1
+                lower_bound = Q1 - 1.5 * IQR
+                upper_bound = Q3 + 1.5 * IQR
+                x[feature] = x[feature].clip(lower_bound, upper_bound)
+                
+        x[numeric_features] = self.scaler.fit_transform(x[numeric_features])
+        return x
+        
+    def _encode_categorical_features(self, X: pd.DataFrame) -> pd.DataFrame:
+
+        categorical_features = ['SEX', 'EDUCATION', 'MARRIAGE']
+        
+        for feature in categorical_features:
+            if feature in X.columns:
+                le = LabelEncoder()
+                X[feature] = le.fit_transform(X[feature])
+                self.label_encoders[feature] = le
+                
+                if len(le.classes_) > 2:
+                    one_hot = pd.get_dummies(X[feature], prefix=feature)
+                    X = pd.concat([X, one_hot], axis=1)
+                    X.drop(feature, axis=1, inplace=True)
+                    
+        return X
+        
     def _engineer_features(self, X: pd.DataFrame) -> pd.DataFrame:
 
         for i in range(1, 7):
