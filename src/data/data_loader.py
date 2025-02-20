@@ -2,7 +2,7 @@ import pandas as pd
 import logging
 from typing import Optional, Tuple, Union
 from pathlib import Path
-import utils.helpers
+from helpers import Helpers
 
 class DataLoader:
     
@@ -11,7 +11,7 @@ class DataLoader:
         self.data_path = Path(data_path) if data_path else None
         self.data = None
         self.logger = logging.getLogger(__name__)
-        self.helpers = utils.helpers.Helpers()
+        self.helpers = Helpers()
         
     def load_data(self, data: Optional[Union[list, dict]] = None) -> pd.DataFrame:
 

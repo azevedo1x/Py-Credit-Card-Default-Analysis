@@ -1,0 +1,12 @@
+2025-02-20 15:24:48,221 - __main__ - INFO - Loading data...
+2025-02-20 15:24:53,513 - __main__ - INFO - Data summary: {'total_records': 30000, 'missing_values': {'ID': 0, 'LIMIT_BAL': 0, 'SEX': 0, 'EDUCATION': 0, 'MARRIAGE': 0, 'AGE': 0, 'PAY_1': 0, 'PAY_2': 0, 'PAY_3': 0, 'PAY_4': 0, 'PAY_5': 0, 'PAY_6': 0, 'BILL_AMT1': 0, 'BILL_AMT2': 0, 'BILL_AMT3': 0, 'BILL_AMT4': 0, 'BILL_AMT5': 0, 'BILL_AMT6': 0, 'PAY_AMT1': 0, 'PAY_AMT2': 0, 'PAY_AMT3': 0, 'PAY_AMT4': 0, 'PAY_AMT5': 0, 'PAY_AMT6': 0, 'default payment next month': 0}, 'data_types': {'ID': dtype('int64'), 'LIMIT_BAL': dtype('int64'), 'SEX': dtype('int64'), 'EDUCATION': dtype('int64'), 'MARRIAGE': dtype('int64'), 'AGE': dtype('int64'), 'PAY_1': dtype('int64'), 'PAY_2': dtype('int64'), 'PAY_3': dtype('int64'), 'PAY_4': dtype('int64'), 'PAY_5': dtype('int64'), 'PAY_6': dtype('int64'), 'BILL_AMT1': dtype('int64'), 'BILL_AMT2': dtype('int64'), 'BILL_AMT3': dtype('int64'), 'BILL_AMT4': dtype('int64'), 'BILL_AMT5': dtype('int64'), 'BILL_AMT6': dtype('int64'), 'PAY_AMT1': dtype('int64'), 'PAY_AMT2': dtype('int64'), 'PAY_AMT3': dtype('int64'), 'PAY_AMT4': dtype('int64'), 'PAY_AMT5': dtype('int64'), 'PAY_AMT6': dtype('int64'), 'default payment next month': dtype('int64')}, 'memory_usage': np.float64(5.722171783447266), 'class_distribution': {0: 23364, 1: 6636}}
+2025-02-20 15:24:53,515 - __main__ - INFO - Preprocessing data...
+2025-02-20 15:24:53,515 - __main__ - ERROR - Error in analysis pipeline: DataLoader.split_features_target() missing 1 required positional argument: 'target_col'
+Traceback (most recent call last):
+  File "c:\Users\Azevedo\Desktop\Py-Credit-Card-Default-Analysis\main.py", line 52, in run
+    self.data = self.load_and_preprocess_data()
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\Azevedo\Desktop\Py-Credit-Card-Default-Analysis\main.py", line 77, in load_and_preprocess_data
+    X, y = self.data_loader.split_features_target()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+TypeError: DataLoader.split_features_target() missing 1 required positional argument: 'target_col'
