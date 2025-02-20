@@ -111,7 +111,7 @@ class CreditDefaultAnalysis:
 
         self.logger.info("Generating visualizations...")
 
-        self.visualizer = Visualizer(output_dir=Path('outputs'))
+        self.visualizer.output_dir=Path('outputs')
 
         self.visualizer.plot_metrics_comparison(results)
 
