@@ -110,17 +110,21 @@ class CreditDefaultAnalysis:
     def generate_visualizations(self, results):
 
         self.logger.info("Generating visualizations...")
+
+        self.visualizer = Visualizer(output_dir=Path('outputs'))
+
         self.visualizer.plot_metrics_comparison(results)
+
         self.visualizer.plot_confusion_matrices(results)
-        
-        rf_feature_importance = self.models['Random Forest'].get_feature_importance(self.X.columns)
-        self.visualizer.plot_feature_importance(rf_feature_importance)
-        
-        rf_tree_importance = self.models['Random Forest'].get_trees_feature_importance(self.X.columns)
-        self.visualizer.plot_feature_importance_with_std(
-            rf_tree_importance['mean_importance'],
-            rf_tree_importance['std_importance']
-        )
+
+        self.visualizer.plot_feature_importance(self.feature_importance_dict)
+
+        self.visualizer.plot_feature_importance_with_std(self.mean_importance, self.std_importance)
+
+        self.visualizer.plot_roc_curves(results)
+
+        self.visualizer.plot_learning_curves(self.train_sizes, self.train_scores, self.test_scores,
+                                             "Random Forest")
     
     def save_results(self, results, detailed_results):
         with open(self.output_dir / 'metrics_results.json', 'w') as f:
