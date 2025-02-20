@@ -2,7 +2,7 @@ import pandas as pd
 import logging
 from typing import Optional, Tuple, Union
 from pathlib import Path
-from helpers import Helpers
+from src.utils.helpers import Helpers
 
 class DataLoader:
     
@@ -61,7 +61,7 @@ class DataLoader:
             if col in self.data.columns and not pd.api.types.is_numeric_dtype(self.data[col]):
                 self.data[col] = pd.to_numeric(self.data[col], errors='coerce')
                 
-    def split_features_target(self, target_col: str) -> Tuple[pd.DataFrame, pd.Series]:
+    def split_features_target(self, target_col: str="") -> Tuple[pd.DataFrame, pd.Series]:
 
         default_col = 'default payment next month'
         target_col = target_col or default_col
