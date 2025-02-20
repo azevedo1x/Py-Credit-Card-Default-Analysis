@@ -40,4 +40,7 @@ class SVMModel(BaseModel):
         else:
             importance = np.abs(best_svm.decision_function(X)).mean(axis=0)
             
+        if feature_names is None:
+            feature_names = [f'feature_{i}' for i in range(len(importance))]
+                
         return dict(zip(feature_names, importance))

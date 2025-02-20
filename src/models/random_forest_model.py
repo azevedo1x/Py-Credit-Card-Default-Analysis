@@ -39,7 +39,10 @@ class RandomForestModel(BaseModel):
             raise ValueError("Model not trained")
             
         importance = self.search.best_estimator_.feature_importances_
-            
+
+        if feature_names is None:
+            feature_names = [f'feature_{i}' for i in range(len(importance))]
+
         return dict(zip(feature_names, importance))
         
     def get_trees_feature_importance(self, feature_names=None):
@@ -52,7 +55,10 @@ class RandomForestModel(BaseModel):
         
         mean_importance = all_importances.mean(axis=0)
         std_importance = all_importances.std(axis=0)
-              
+
+        if feature_names is None:
+            feature_names = [f'feature_{i}' for i in range(len(mean_importance))]
+
         return {
             'mean_importance': dict(zip(feature_names, mean_importance)),
             'std_importance': dict(zip(feature_names, std_importance))
