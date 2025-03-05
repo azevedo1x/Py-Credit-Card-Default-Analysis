@@ -36,7 +36,7 @@ To set up the project, follow these steps:
    ```bash
    pip install -r requirements.txt
    ```
-   # Or install it manually, if you encountered some errors like i did :)
+   or install it manually, if you encountered some errors like i did :)
 
 
 4. **Download the dataset:**
@@ -49,7 +49,7 @@ To run the analysis, execute the following command:
 ```bash
 python src/main.py
 ```
-Or run it through your preferred IDE/Text editor
+or run it through your preferred IDE/Text editor
 
 This will:
 - Load and preprocess the data.
